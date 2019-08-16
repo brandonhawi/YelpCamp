@@ -1,0 +1,15 @@
+<% include ../partials/header %>
+
+<div class="container mt-3">
+    <h3 class="text-center">Edit Comment</h3>
+    <form class="mb-3" action="/campgrounds/<%= campground_id %>/comments/<%= comment._id %>?_method=PUT" method="post">
+        <div class="form-group">
+            <label for="campName">Comment Text</label>
+            <input type="text" name="comment[text]" value="<%= comment.text %>" id="campName" class="form-control">
+        </div>
+        <input class="btn btn-primary" type="submit">
+    </form>
+    <a href="/campgrounds/<%= campground_id %>">Go Back</a>
+</div>
+
+<% include ../partials/footer %>
