@@ -13,13 +13,14 @@ const express = require('express'),
     commentRoutes = require('./routes/comments'),
     campgroundRoutes = require('./routes/campgrounds'),
     indexRoutes = require('./routes/index'),
-    methodOverride = require('method-override');
+    methodOverride = require('method-override'),
     // port to listen to 
-    port = 3000;
+    port = process.env.PORT,
+    IP = process.env.IP;
 
-mongoose.connect("mongodb+srv://brandonhawi:fK6HkbaV@yelpcamp-rccyu.mongodb.net/yelpcamp?retryWrites=true&w=majority", 
-    { 
-        useNewUrlParser: true, 
+mongoose.connect("mongodb+srv://brandonhawi:fK6HkbaV@yelpcamp-rccyu.mongodb.net/yelpcamp?retryWrites=true&w=majority",
+    {
+        useNewUrlParser: true,
         useFindAndModify: false,
         useCreateIndex: true,
     }).then(() => {
@@ -50,7 +51,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use((req,res,next) => {
+app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
@@ -63,6 +64,6 @@ app.use("/campgrounds/:id/comments", commentRoutes);
 
 
 
-app.listen(port, () => {
+app.listen(port, IP, () => {
     console.log(`The Yelp Camp server is listening on port ${port}!`);
 });
