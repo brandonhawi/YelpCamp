@@ -17,7 +17,16 @@ const express = require('express'),
     // port to listen to 
     port = 3000;
 
-mongoose.connect("mongodb://localhost/yelpcamp", { useNewUrlParser: true, useFindAndModify: false});
+mongoose.connect("mongodb+srv://brandonhawi:fK6HkbaV@yelpcamp-rccyu.mongodb.net/yelpcamp?retryWrites=true&w=majority", 
+    { 
+        useNewUrlParser: true, 
+        useFindAndModify: false,
+        useCreateIndex: true,
+    }).then(() => {
+        console.log("Successfully connected to mongoDB Atlas...");
+    }).catch(err => {
+        console.log(`ERROR: ${err.message}`);
+    });
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
