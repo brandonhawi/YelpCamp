@@ -18,16 +18,17 @@ const express = require('express'),
     port = process.env.PORT,
     IP = process.env.IP;
 
-mongoose.connect("mongodb+srv://brandonhawi:fK6HkbaV@yelpcamp-rccyu.mongodb.net/yelpcamp?retryWrites=true&w=majority",
+mongoose.connect(process.env.DBURL,
     {
         useNewUrlParser: true,
         useFindAndModify: false,
         useCreateIndex: true,
     }).then(() => {
-        console.log("Successfully connected to mongoDB Atlas...");
+        console.log("Successfully connected to database...");
     }).catch(err => {
         console.log(`ERROR: ${err.message}`);
     });
+
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
