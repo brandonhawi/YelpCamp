@@ -17,19 +17,19 @@ router.get("/register", (req, res) => {
 
 // Handles Registration Form
 
-router.post("/register", (req, res) => {
-    let newUser = new User({ username: req.body.username });
-    User.register(newUser, req.body.password, (err, user) => {
-        if (err) {
-            req.flash("error", err.message);
-            return res.redirect("register");
-        }
-        passport.authenticate("local")(req, res, () => {
-            req.flash("success", `Hello ${user.username}, you've successfully registered!`);
-            res.redirect("/campgrounds");
-        });
-    });
-});
+// router.post("/register", (req, res) => {
+//     let newUser = new User({ username: req.body.username });
+//     User.register(newUser, req.body.password, (err, user) => {
+//         if (err) {
+//             req.flash("error", err.message);
+//             return res.redirect("register");
+//         }
+//         passport.authenticate("local")(req, res, () => {
+//             req.flash("success", `Hello ${user.username}, you've successfully registered!`);
+//             res.redirect("/campgrounds");
+//         });
+//     });
+// });
 
 // Login Form
 
@@ -39,17 +39,17 @@ router.get("/login", (req, res) => {
 
 // Handles Login Form
 
-router.post("/login", passport.authenticate("local", {
-    successRedirect: "/campgrounds",
-    failureRedirect: "/login",
-    failureFlash: true,
-}), (req, res) => {
-});
+// router.post("/login", passport.authenticate("local", {
+//     successRedirect: "/campgrounds",
+//     failureRedirect: "/login",
+//     failureFlash: true,
+// }), (req, res) => {
+// });
 
 // Logout
 
 router.get("/logout", (req, res) => {
-    req.logout();
+    // req.logout();
     req.flash("success", "Logged you out");
     res.redirect("/campgrounds");
 });
